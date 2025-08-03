@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>比特星云 - AI算力服务平台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(90deg, #8a2be2, #4169e1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .glow-button {
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .glow-button:hover {
+            box-shadow: 0 0 30px rgba(138, 43, 226, 0.8);
+            transform: translateY(-2px);
+        }
+        
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 4s infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .planet {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #4a69bd, #1e3799);
+            box-shadow: 0 0 30px rgba(74, 105, 189, 0.6);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- 星空背景 -->
+    <div class="fixed inset-0 overflow-hidden z-0">
+        <div class="star" style="width: 2px; height: 2px; top: 10%; left: 15%;"></div>
+        <div class="star" style="width: 3px; height: 3px; top: 20%; left: 80%; animation-delay: 1s;"></div>
+        <div class="star" style="width: 1px; height: 1px; top: 30%; left: 40%; animation-delay: 2s;"></div>
+        <div class="star" style="width: 2px; height: 2px; top: 70%; left: 10%; animation-delay: 0.5s;"></div>
+        <div class="star" style="width: 3px; height: 3px; top: 80%; left: 90%; animation-delay: 1.5s;"></div>
+        <div class="star" style="width: 1px; height: 1px; top: 50%; left: 60%; animation-delay: 3s;"></div>
+        
+        <!-- 行星装饰 -->
+        <div class="planet" style="width: 120px; height: 120px; top: 10%; right: 5%;"></div>
+        <div class="planet" style="width: 80px; height: 80px; bottom: 10%; left: 5%; animation-duration: 15s;"></div>
+    </div>
+
+    <!-- 导航栏 -->
+    <nav class="fixed w-full z-50 glass-effect">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-rocket text-2xl text-purple-500"></i>
+                <span class="text-xl font-bold">比特星云</span>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="hover:text-purple-400 transition">首页</a>
+                <a href="#products" class="hover:text-purple-400 transition">算力产品</a>
+                <a href="#platform" class="hover:text-purple-400 transition">智算平台</a>
+                <a href="#solutions" class="hover:text-purple-400 transition">解决方案</a>
+                <a href="#pricing" class="hover:text-purple-400 transition">价格</a>
+                <a href="#contact" class="hover:text-purple-400 transition">联系我们</a>
+            </div>
+            <button class="bg-purple-600 hover:bg-purple-700 px-6 py-2 rounded-full transition glow-button">
+                开始使用
+            </button>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative z-10 pt-20">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 scroll-reveal">
+                探索<span class="text-gradient">AI算力</span>的无限可能
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto scroll-reveal">
+                比特星云为您提供高性能、高稳定性的AI算力服务，助力企业快速实现AI转型
+            </p>
+            <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6 scroll-reveal">
+                <button class="bg-gradient-to-r from-purple-600 to-blue-600 px-8 py-4 rounded-full text-lg font-medium hover:shadow-lg hover:shadow-purple-500/50 transition-all glow-button">
+                    立即体验
+                </button>
+                <button class="glass-effect px-8 py-4 rounded-full text-lg font-medium hover:bg-white/10 transition">
+                    了解方案
+                </button>
+            </div>
+            
+            <!-- 统计数据 -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mt-20 scroll-reveal">
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-purple-400">99.9%</div>
+                    <div class="text-gray-400 mt-2">服务可用性</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-blue-400">10ms</div>
+                    <div class="text-gray-400 mt-2">低延迟响应</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-green-400">1000+</div>
+                    <div class="text-gray-400 mt-2">企业客户</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-yellow-400">24/7</div>
+                    <div class="text-gray-400 mt-2">技术支持</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 3D图形装饰 -->
+        <div class="absolute bottom-10 left-10 floating">
+            <div class="w-32 h-32 rounded-full bg-gradient-to-br from-purple-600 to-blue-600 opacity-20 blur-xl"></div>
+        </div>
+        <div class="absolute bottom-20 right-10 floating" style="animation-delay: 2s;">
+            <div class="w-24 h-24 rounded-full bg-gradient-to-br from-blue-500 to-teal-500 opacity-20 blur-xl"></div>
+        </div>
+    </section>
+
+    <!-- 算力产品 -->
+    <section id="products" class="py-20 relative z-10">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-4 scroll-reveal">算力产品</h2>
+            <p class="text-xl text-gray-400 text-center mb-12 max-w-2xl mx-auto scroll-reveal">
+                提供多种GPU算力选项，满足不同规模企业的AI推理需求
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- 产品卡片 -->
+                <div class="glass-effect rounded-2xl p-8 hover:scale-105 transition-all scroll-reveal">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-microchip text-5xl text-purple-500 mb-4"></i>
+                        <h3 class="text-2xl font-bold mb-2">入门级</h3>
+                        <p class="text-gray-400">适合小型AI应用开发</p>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> 4核CPU + 16GB内存</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> 1x RTX 4090 GPU</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> 500GB SSD存储</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> 10Mbps带宽</li>
+                    </ul>
+                    <div class="text-center">
+                        <span class="text-3xl font-bold text-gradient">¥2.8</span>
+                        <span class="text-gray-400">/小时</span>
+                    </div>
+                    <button class="w-full mt-6 bg-purple-600 hover:bg-purple-700 py-3 rounded-lg transition">
+                        立即租用
+                    </button>
+                </div>
+                
+                <div class="glass-effect rounded-2xl p-8 border-2 border-purple-500 hover:scale-105 transition-all scroll-reveal">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-server text-5xl text-blue-500 mb-4"></i>
+                        <h3 class="text-2xl font-bold mb-2">专业级</h3>
+                        <p class="text-gray-400">适合中型AI推理服务</p>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> 8核CPU + 32GB内存</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> 2x RTX 4090 GPU</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> 1TB SSD存储</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> 50Mbps带宽</li>
+                    </ul>
+                    <div class="text-center">
+                        <span class="text-3xl font-bold text-gradient">¥6.8</span>
+                        <span class="text-gray-400">/小时</span>
+                    </div>
+                    <button class="w-full mt-6 bg-gradient-to-r from-purple-600 to-blue-600 py-3 rounded-lg transition glow-button">
+                        立即租用
+                    </button>
+                </div>
+                
+                <div class="glass-effect rounded-2xl p-8 hover:scale-105 transition-all scroll-reveal">
+                    <div class="text-center mb-6">
+                        <i class="fas fa-cloud text-5xl text-teal-500 mb-4"></i>
+                        <h3 class="text-2xl font-bold mb-2">企业级</h3>
+                        <p class="text-gray-400">适合大规模AI推理集群</p>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> 16核CPU + 64GB内存</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> 4x RTX 4090 GPU</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> 2TB SSD存储</li>
+                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> 100Mbps带宽</li>
+                    </ul>
+                    <div class="text-center">
+                        <span class="text-3xl font-bold text-gradient">¥12.8</span>
+                        <span class="text-gray-400">/小时</span>
+                    </div>
+                    <button class="w-full mt-6 bg-teal-600 hover:bg-teal-700 py-3 rounded-lg transition">
+                        立即租用
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 智算平台 -->
+    <section id="platform" class="py-20 relative z-10">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-4 scroll-reveal">智算平台</h2>
+            <p class="text-xl text-gray-400 text-center mb-12 max-w-2xl mx-auto scroll-reveal">
+                一站式AI开发与部署平台，让AI开发更简单
+            </p>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="scroll-reveal">
+                    <img src="https://picsum.photos/seed/aiplatform/600/400" alt="智算平台" class="rounded-2xl shadow-2xl">
+                </div>
+                <div class="space-y-6 scroll-reveal">
+                    <div class="flex items-start">
+                        <div class="bg-purple-600 p-3 rounded-full mr-4">
+                            <i class="fas fa-bolt text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">一键部署</h3>
+                            <p class="text-gray-400">支持主流深度学习框架，只需几步即可完成模型部署</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="bg-blue-600 p-3 rounded-full mr-4">
+                            <i class="fas fa-chart-line text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">实时监控</h3>
+                            <p class="text-gray-400">全方位监控算力使用情况，实时优化资源分配</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="bg-teal-600 p-3 rounded-full mr-4">
+                            <i class="fas fa-shield-alt text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">安全可靠</h3>
+                            <p class="text-gray-400">企业级安全防护，保障您的数据和模型安全</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="bg-yellow-600 p-3 rounded-full mr-4">
+                            <i class="fas fa-sync text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-2">弹性扩展</h3>
+                            <p class="text-gray-400">根据业务需求自动调整算力资源，按需付费</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 解决方案 -->
+    <section id="solutions" class="py-20 relative z-10">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-4 scroll-reveal">解决方案</h2>
+            <p class="text-xl text-gray-400 text-center mb-12 max-w-2xl mx-auto scroll-reveal">
+                针对不同行业提供定制化AI算力解决方案
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-effect rounded-2xl p-6 hover:scale-105 transition-all scroll-reveal">
+                    <div class="bg-purple-600 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-brain text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">智慧医疗</h3>
+                    <p class="text-gray-400 mb-4">提供高性能算力支持医疗影像分析、药物研发等AI应用</p>
+                    <a href="#" class="text-purple-400 hover:text-purple-300 flex items-center">
+                        了解更多 <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <div class="glass-effect rounded-2xl p-6 hover:scale-105 transition-all scroll-reveal">
+                    <div class="bg-blue-600 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-car text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">智能驾驶</h3>
+                    <p class="text-gray-400 mb-4">支持大规模自动驾驶模型训练与实时推理</p>
+                    <a href="#" class="text-purple-400 hover:text-purple-300 flex items-center">
+                        了解更多 <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                
+                <div class="glass-effect rounded-2xl p-6 hover:scale-105 transition-all scroll-reveal">
+                    <div class="bg-teal-600 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-industry text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">智能制造</h3>
+                    <p class="text-gray-400 mb-4">赋能工业质检、预测性维护等智能制造场景</p>
+                    <a href="#" class="text-purple-400 hover:text-purple-300 flex items-center">
+                        了解更多 <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 客户评价 -->
+    <section class="py-20 relative z-10">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-4 scroll-reveal">客户评价</h2>
+            <p class="text-xl text-gray-400 text-center mb-12 max-w-2xl mx-auto scroll-reveal">
+                来自全球AI开发者的真实反馈
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-effect rounded-2xl p-6 scroll-reveal">
+                    <div class="flex items-center mb-4">
+                        <img src="https://picsum.photos/seed/user1/50/50" alt="客户头像" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">张明</h4>
+                            <p class="text-gray-400 text-sm">某AI创业公司CTO</p>
+                        </div>
+                    </div>
+                    <div class="flex mb-3">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-300">"比特星云的算力服务非常稳定，我们的AI模型推理速度提升了300%，大大降低了运营成本。"</p>
+                </div>
+                
+                <div class="glass-effect rounded-2xl p-6 scroll-reveal">
+                    <div class="flex items-center mb-4">
+                        <img src="https://picsum.photos/seed/user2/50/50" alt="客户头像" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">李华</h4>
+                            <p class="text-gray-400 text-sm">某科技公司AI负责人</p>
+                        </div>
+                    </div>
+                    <div class="flex mb-3">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-300">"平台的一键部署功能太方便了，我们团队可以专注于模型优化，无需担心基础设施问题。"</p>
+                </div>
+                
+                <div class="glass-effect rounded-2xl p-6 scroll-reveal">
+                    <div class="flex items-center mb-4">
+                        <img src="https://picsum.photos/seed/user3/50/50" alt="客户头像" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">王芳</h4>
+                            <p class="text-gray-400 text-sm">某金融机构数据科学家</p>
+                        </div>
+                    </div>
+                    <div class="flex mb-3">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                    <p class="text-gray-300">"金融风控模型需要极高的稳定性，比特星云的99.9%可用性承诺让我们非常放心。"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 合作伙伴 -->
+    <section class="py-20 relative z-10">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 scroll-reveal">合作伙伴</h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 items-center">
+                <div class="glass-effect rounded-xl p-6 flex items-center justify-center h-24 scroll-reveal">
+                    <i class="fab fa-nvidia text-4xl text-green-500"></i>
+                </div>
+                <div class="glass-effect rounded-xl p-6 flex items-center justify-center h-24 scroll-reveal">
+                    <i class="fab fa-google text-4xl text-red-500"></i>
+                </div>
+                <div class="glass-effect rounded-xl p-6 flex items-center justify-center h-24 scroll-reveal">
+                    <i class="fab fa-microsoft text-4xl text-blue-500"></i>
+                </div>
+                <div class="glass-effect rounded-xl p-6 flex items-center justify-center h-24 scroll-reveal">
+                    <i class="fab fa-amazon text-4xl text-orange-500"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系表单 -->
+    <section id="contact" class="py-20 relative z-10">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl font-bold text-center mb-4 scroll-reveal">联系我们</h2>
+                <p class="text-xl text-gray-400 text-center mb-12 scroll-reveal">
+                    有任何问题或需求？请随时与我们联系
+                </p>
+                
+                <div class="glass-effect rounded-2xl p-8 scroll-reveal">
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-gray-300 mb-2">姓名</label>
+                                <input type="text" class="w-full bg-gray-800 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                            </div>
+                            <div>
+                                <label class="block text-gray-300 mb-2">邮箱</label>
+                                <input type="email" class="w-full bg-gray-800 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-300 mb-2">公司</label>
+                            <input type="text" class="w-full bg-gray-800 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-300 mb-2">需求描述</label>
+                            <textarea rows="4" class="w-full bg-gray-800 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-purple-500"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-blue-600 py-4 rounded-lg text-lg font-medium hover:shadow-lg hover:shadow-purple-500/50 transition-all glow-button">
+                            提交咨询
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="py-12 relative z-10">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-rocket text-2xl text-purple-500"></i>
+                        <span class="text-xl font-bold">比特星云</span>
+                    </div>
+                    <p class="text-gray-400">提供高性能、高稳定性的AI算力服务</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">产品</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">算力产品</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">智算平台</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">解决方案</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">支持</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">帮助中心</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">API文档</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">社区论坛</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">联系方式</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><i class="fas fa-envelope mr-2"></i> contact@bitcloud.ai</li>
+                        <li><i class="fas fa-phone mr-2"></i> 400-888-9999</li>
+                        <li><i class="fas fa-map-marker-alt mr-2"></i> 北京市海淀区</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 比特星云. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 滚动动画
+        const scrollReveal = document.querySelectorAll('.scroll-reveal');
+        
+        const revealOnScroll = () => {
+            scrollReveal.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // 星星动画
+        const createStars = () => {
+            const starsContainer = document.querySelector('.fixed.inset-0');
+            const starCount = 100;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.width = Math.random() * 3 + 'px';
+                star.style.height = star.style.width;
+                star.style.top = Math.random() * 100 + '%';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 4 + 's';
+                starsContainer.appendChild(star);
+            }
+        };
+        
+        createStars();
+    </script>
+</body>
+</html>
